@@ -1,0 +1,251 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+body {
+  background-color: #f0f0f0 !important;
+}
+
+.whiteTimeBox {
+  margin-bottom: 30px;
+  box-shadow: none;
+  border-width: 0;
+  border: 1px solid transparent;
+  border-color: #ddd;
+  min-height: 549px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 10px 10px 10px;
+}
+.timeHeading {
+  font-size: 112px;
+  color: #555 !important;
+  margin-bottom: 0px;
+}
+.dateHeading {
+  color: #555 !important;
+  font-size: 28px;
+  margin-top: 0px;
+}
+.btnAlarm {
+  border-color: #429c65;
+  color: #fff;
+  background-color: #4aae71;
+  border-color: #4aae71;
+  min-width: 90px;
+  padding: 8px 12px;
+  font-size: 13px;
+  line-height: 1.6;
+  border: none;
+  cursor: pointer;
+}
+.btnAlarm:hover {
+  background-color: #2e7e4d;
+}
+
+.whiteTimeBoxTwo {
+  margin-bottom: 30px;
+  box-shadow: none;
+  border-width: 0;
+  border: 1px solid transparent;
+  border-color: #ddd;
+  min-height: 549px;
+  padding: 30px;
+  width: calc(50% - 10px);
+  margin: 10px 10px 10px 10px;
+}
+.panelHeading {
+  padding: 0px 0px 15px 0px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 15px;
+}
+.mainWrapper {
+  display: flex;
+  gap: 20px;
+}
+.alermBtn {
+  padding: 8px 12px;
+  line-height: 1.6;
+  border-radius: 0px;
+  border-color: rgb(0, 144, 221);
+  color: rgb(255, 255, 255);
+  background-color: rgb(0, 144, 221);
+  margin-right: 5px;
+  margin-bottom: 5px;
+  min-width: 90px;
+  margin-top: 0px;
+  display: inline-grid;
+}
+
+@media (max-width: 767px) {
+  .mainWrapper {
+    flex-wrap: wrap;
+  }
+  .whiteTimeBoxTwo {
+    width: 100%;
+  }
+}
+
+.recenttime {
+  color: red;
+}
+
+.whiteTimeBoxthree {
+  margin-bottom: 30px;
+  box-shadow: none;
+  border-width: 0;
+  border: 1px solid transparent;
+  border-color: #ddd;
+  min-height: 349px;
+  padding: 30px;
+  margin: 10px 10px 10px 10px;
+}
+.mainbody {
+  width: 100%;
+}
+
+.recentBox {
+  justify-content: space-between;
+  display: flex;
+}
+
+.btnStart {
+  border-color: #429c65;
+  color: #fff;
+  background-color: #4aae71;
+  border-color: #4aae71;
+  min-width: 90px;
+  padding: 8px 12px;
+  font-size: 13px;
+  line-height: 1.6;
+  border: none;
+  cursor: pointer;
+  margin-right: 5px !important;
+}
+.btnStart:hover {
+  background-color: #2e7e4d;
+}
+.btnStop {
+  border-color: #2596be;
+  color: #fff;
+  background-color: #2596be;
+  border-color: #2596be;
+  min-width: 90px;
+  padding: 8px 12px;
+  font-size: 13px;
+  line-height: 1.6;
+  border: none;
+  cursor: pointer;
+  margin-right: 5px !important;
+}
+.btnStop:hover {
+  background-color: #ff1a1a;
+}
+.btnReset {
+  border-color: #ffcc00;
+  color: #fff;
+  background-color: #ffcc00;
+  border-color: #ffcc00;
+  min-width: 90px;
+  padding: 8px 12px;
+  font-size: 13px;
+  line-height: 1.6;
+  border: none;
+  cursor: pointer;
+}
+.btnReset:hover {
+  background-color: #ffd11a;
+}
+
+.whiteTimeBoxTime {
+  margin-bottom: 30px;
+  box-shadow: none;
+  border-width: 0;
+  border: 1px solid transparent;
+  border-color: #ddd;
+  min-height: 200px;
+  max-height: 400px;
+}
+
+.panelHeadingtime {
+  padding: 10px 15px 10px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 15px;
+}
+
+.timemain {
+  display: flex;
+  justify-content: center;
+  color: #555 !important;
+  font-size: 28px;
+}
+
+.parent {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.child {
+  display: inline-block;
+  width: calc(25% - 10px);
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.listChid {
+  display: inline-block;
+  color: blue;
+  width: calc(25% - 10px);
+}
+
+.addbtnwhitebox {
+  background-color: #fff;
+  margin-bottom: 30px;
+  box-shadow: none;
+  border-width: 0;
+  border: 1px solid transparent;
+  border-color: #ddd;
+  min-height: 200px;
+  max-height: 400px;
+  justify-content: center;
+  display: flex !important;
+  align-items: center;
+}
+.addbtn {
+  border-color: #429c65;
+  color: #fff;
+  background-color: #4aae71;
+  border-color: #4aae71;
+  min-width: 90px;
+  padding: 8px 12px;
+  font-size: 13px;
+  line-height: 1.6;
+  border: none;
+  cursor: pointer;
+  margin-right: 5px !important;
+}
+.modalBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#parent-modal-title {
+  margin-top: 0;
+  padding-left: 20px;
+}
+
+body.light {
+  --background: white;
+  --text: black;
+}
+
+body.dark {
+  --background: black;
+  --text: white;
+}
