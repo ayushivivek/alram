@@ -5,7 +5,7 @@ import moment1 from "moment-timezone";
 const TimerPage = () => {
   const timeZones = moment1.tz.names();
   const [timezone, setTimezone] = useState([]);
- 
+
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
 
@@ -33,8 +33,8 @@ const TimerPage = () => {
       </div>
 
       <div className="parent">
-        {timezone.map((tz) => (
-          <div className="whiteTimeBoxTime child">
+        {timezone.map((tz, index) => (
+          <div className="whiteTimeBoxTime child" key={index}>
             <div className="panelHeadingtime">{tz}</div>
             <div className="timemain">
               {moment().tz(tz).format("h:mm:ss A")}
@@ -49,8 +49,10 @@ const TimerPage = () => {
       <div className="whiteTimeBoxthree">
         <div className="panelHeading">Most Popular Time Zones and Cities</div>
         <div className="list">
-          {timeZones.map((tz) => (
-            <div className="listChid">{tz}</div>
+          {timeZones.map((tz, index) => (
+            <div className="listChid" key={index}>
+              {tz}
+            </div>
           ))}
         </div>
       </div>

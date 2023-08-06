@@ -116,7 +116,7 @@ const AlarmClockPage = () => {
               <p
                 className="alermBtn"
                 style={{ cursor: "pointer" }}
-                keys={index}
+                key={index}
                 onClick={() => quickSet(item)}
               >
                 {item}

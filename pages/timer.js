@@ -94,9 +94,9 @@ const TimePage = () => {
         </div>
 
         <div className="whiteTimeBoxTwo">
-          <div class="panel-body">
+          <div className="panel-body">
             <div className="panelHeading">Holidays</div>
-            <table class="center table-lr">
+            <table className="center table-lr">
               <tbody>
                 <tr>
                   <td>
