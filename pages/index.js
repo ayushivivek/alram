@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-import { hour, min, tunes, quick } from "../uttils";
+import { hour, min, tunes, quick, quickset } from "../uttils";
 import InputLabel from "@mui/material/InputLabel";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
@@ -13,6 +13,9 @@ import ReactPlayer from "react-player";
 import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
 
 const AlarmClockPage = () => {
+  const ll = JSON.parse(
+    typeof window !== "undefined" && localStorage.getItem("myObject")
+  );
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [hr, setHr] = useState("12 AM");
@@ -36,11 +39,8 @@ const AlarmClockPage = () => {
   const clock = () => {
     const tt = localStorage.getItem("alarm");
     if (tt === moment().format("h:mm A")) {
-      setTimeout(() => {
-        localStorage.setItem("al", true);
-        localStorage.setItem("open", true);
-        localStorage.setItem("ring", tunes[ring]);
-      }, 1000);
+      localStorage.setItem("al", true);
+      localStorage.setItem("open", true);
     }
   };
 
@@ -53,13 +53,16 @@ const AlarmClockPage = () => {
     let alarmTime = `${tempTime[0]}:${mi.length == 2 ? mi : 0 + mi} ${
       tempTime[1]
     }`;
+    let newlist = { ...ll, alarmTime: alarmTime };
     localStorage.setItem("alarm", alarmTime);
+    localStorage.setItem("myObject", JSON.stringify(newlist));
     setOpen(false);
-    alert(`Alarm set for ${alarmTime}`);
   };
 
   const onCloseAlarm = () => {
-    localStorage.clear();
+    localStorage.removeItem("alarm");
+    localStorage.removeItem("al");
+    localStorage.removeItem("open");
   };
 
   const onTest = () => {
@@ -79,7 +82,6 @@ const AlarmClockPage = () => {
     localStorage.setItem("alarm", alarmTime);
     alert(`Alarm set for ${alarmTime}`);
   };
-
   return (
     <div>
       <ReactPlayer
@@ -106,6 +108,16 @@ const AlarmClockPage = () => {
         </button>
       </div>
 
+      {typeof window !== "undefined" && localStorage.getItem("alarm") && (
+        <div className="whiteTimeBoxx">
+          <AccessAlarmIcon sx={{ width: "100%", fontSize: 40 }} />
+          <h2 className="timeHeadingx">{localStorage.getItem("alarm")}</h2>
+          <button className="btnStop" type="button" onClick={onCloseAlarm}>
+            Stop Alarm
+          </button>
+        </div>
+      )}
+
       <div className="mainWrapper">
         <div className="whiteTimeBoxTwo">
           <div className="panelHeading">
@@ -128,41 +140,33 @@ const AlarmClockPage = () => {
         <div className="whiteTimeBoxTwo">
           <div className="panelHeading">Recently used</div>
           <div className="panelBody">
+            {ll &&
+              Object.keys(ll)
+                ?.reverse()
+                .map((item, index) => {
+                  return (
+                    <div className="recentBox" key={index}>
+                      <p>{ll[item]}</p>
+                    </div>
+                  );
+                })}
             <div className="recentBox">
-              <p className="recenttime">4:00 AM</p>
               <p>4:00 AM</p>
             </div>
             <div className="recentBox">
-              <p className="recenttime">4:30 AM</p>
-              <p>4:00 AM</p>
+              <p>5:00 AM</p>
             </div>
             <div className="recentBox">
-              <p className="recenttime">5:00 AM</p>
-              <p>4:00 AM</p>
+              <p>6:00 AM</p>
             </div>
             <div className="recentBox">
-              <p className="recenttime">5:30 AM</p>
-              <p>4:00 AM</p>
+              <p>7:00 AM</p>
             </div>
             <div className="recentBox">
-              <p className="recenttime">6:00 AM</p>
-              <p>4:00 AM</p>
+              <p>8:00 AM</p>
             </div>
             <div className="recentBox">
-              <p className="recenttime">6:30 AM</p>
-              <p>4:00 AM</p>
-            </div>
-            <div className="recentBox">
-              <p className="recenttime">7:00 AM</p>
-              <p>4:00 AM</p>
-            </div>
-            <div className="recentBox">
-              <p className="recenttime">7:30 AM</p>
-              <p>4:00 AM</p>
-            </div>
-            <div className="recentBox">
-              <p className="recenttime">8:00 AM</p>
-              <p>4:00 AM</p>
+              <p>9:00 AM</p>
             </div>
           </div>
         </div>

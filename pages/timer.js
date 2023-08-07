@@ -1,42 +1,123 @@
-import { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import moment from "moment";
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
+import { Button } from "@mui/material";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import { min, hour2 } from "../uttils";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
 
 const TimePage = () => {
+  const [value, setValue] = useState("Runasstopwatch");
   const [timer, setTimer] = useState(0);
   const [isActive, setIsActive] = useState(false);
+  const [time, setTime] = useState(moment.duration("00:00:00"));
+  const [count, setCount] = useState(moment.duration("00:00"));
+  const [option, setOption] = useState(false);
+  const [hr, setHr] = useState("0");
+  const [mi, setmin] = useState("0");
+  const [sec, setsec] = useState("0");
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    let interval = null;
-    if (isActive) {
-      interval = setInterval(() => {
-        setTimer((timer) => timer + 10);
-      }, 10); // Updating every 10 milliseconds for 1/100th of a second precision
-    } else if (!isActive && timer !== 0) {
-      clearInterval(interval);
-    }
-    return () => clearInterval(interval);
+    const timer = setInterval(() => {
+      if (isActive) {
+        if (option) {
+          setTime((prevTime) => {
+            if (prevTime.asSeconds() > 0) {
+              return moment.duration(prevTime.asSeconds() - 1, "seconds");
+            } else {
+              clearInterval(timer);
+              setIsActive(false);
+              return moment.duration("00:00:00");
+            }
+          });
+        } else {
+          setCount((prevTime) =>
+            moment.duration(prevTime.asSeconds() + 1, "seconds")
+          );
+        }
+      }
+    }, 1000);
+
+    return () => clearInterval(timer);
   }, [isActive, timer]);
 
+  // useEffect(() => {
+  //   let interval = null;
+  //   if (isActive) {
+  //     interval = setInterval(() => {
+  //       setTimer((timer) => timer + 10);
+  //     }, 10); // Updating every 10 milliseconds for 1/100th of a second precision
+  //   } else if (!isActive && timer !== 0) {
+  //     clearInterval(interval);
+  //   }
+  //   return () => clearInterval(interval);
+  // }, [isActive, timer]);
+
   const handleStart = () => {
-    setIsActive(true);
+    if (formatTime() !== "00:00:00") {
+      setIsActive(true);
+    } else if (!option) {
+      setIsActive(true);
+    }
   };
   const handleStop = () => {
     setIsActive(false);
   };
   const handleReset = () => {
-    setTimer(0);
+    setTime(moment.duration("00:00:00"));
+    setCount(moment.duration("00:00"));
   };
 
-  const formatTime = (time) => {
-    const seconds = String(Math.floor((time / 1000) % 60)).padStart(2, "0");
-    const minutes = String(Math.floor((time / 60000) % 60)).padStart(2, "0");
+  const formatTime = () => {
+    const hours = time.hours().toString().padStart(2, "0");
+    const minutes = time.minutes().toString().padStart(2, "0");
+    const seconds = time.seconds().toString().padStart(2, "0");
+    return `${hours}:${minutes}:${seconds}`;
+  };
+  const formatTimeCount = () => {
+    const minutes = count.minutes().toString().padStart(2, "0");
+    const seconds = count.seconds().toString().padStart(2, "0");
     return `${minutes}:${seconds}`;
   };
 
+  const handleChange = (event) => {
+    setValue(event.target.value);
+    if (event.target.value === "Runasstopwatch") {
+      setOption(false);
+    } else {
+      setOption(true);
+    }
+  };
+
+  const onSetAlarm = () => {
+    let alarmTime = `${hr.length == 2 ? hr : 0 + hr}:${
+      mi.length == 2 ? mi : 0 + mi
+    }:${sec.length == 2 ? sec : 0 + sec}`;
+    setTime(moment.duration(alarmTime));
+    setOpen(false);
+  };
   return (
     <>
       <div className="whiteTimeBox">
-        <h2 className="timeHeading">{formatTime(timer)}</h2>
+        {option ? (
+          <h2 className="timeHeading">{formatTime()}</h2>
+        ) : (
+          <h2 className="timeHeading">{formatTimeCount()}</h2>
+        )}
         <div>
+          <button
+            className="btnEdit"
+            type="button"
+            onClick={() => setOpen(true)}
+          >
+            Edit
+          </button>
           {!isActive ? (
             <button className="btnAlarm" type="button" onClick={handleStart}>
               Start
@@ -48,7 +129,7 @@ const TimePage = () => {
           )}
 
           <button
-            className="btnAlarm"
+            className="btnReset"
             style={{ marginLeft: "3px" }}
             type="button"
             onClick={handleReset}
@@ -212,49 +293,49 @@ const TimePage = () => {
                 </tr>
                 <tr>
                   <td>
-                    <a href="/timer/columbus-day/">Columbus Day</a>
+                    <a>Columbus Day</a>
                   </td>
                   <td>Oct 9, 2023</td>
                   <td>65 days</td>
                 </tr>
                 <tr>
                   <td>
-                    <a href="/timer/halloween/">Halloween</a>
+                    <a>Halloween</a>
                   </td>
                   <td>Oct 31, 2023</td>
                   <td>87 days</td>
                 </tr>
                 <tr>
                   <td>
-                    <a href="/timer/veterans-day/">Veterans Day</a>
+                    <a>Veterans Day</a>
                   </td>
                   <td>Nov 11, 2023</td>
                   <td>98 days</td>
                 </tr>
                 <tr>
                   <td>
-                    <a href="/timer/thanksgiving-day/">Thanksgiving Day</a>
+                    <a>Thanksgiving Day</a>
                   </td>
                   <td>Nov 23, 2023</td>
                   <td>110 days</td>
                 </tr>
                 <tr>
                   <td>
-                    <a href="/timer/black-friday/">Black Friday</a>
+                    <a>Black Friday</a>
                   </td>
                   <td>Nov 24, 2023</td>
                   <td>111 days</td>
                 </tr>
                 <tr>
                   <td>
-                    <a href="/timer/cyber-monday/">Cyber Monday</a>
+                    <a>Cyber Monday</a>
                   </td>
                   <td>Nov 27, 2023</td>
                   <td>114 days</td>
                 </tr>
                 <tr>
                   <td>
-                    <a href="/timer/christmas-day/">Christmas</a>
+                    <a>Christmas</a>
                   </td>
                   <td>Dec 25, 2023</td>
                   <td>142 days</td>
@@ -264,6 +345,143 @@ const TimePage = () => {
           </div>
         </div>
       </div>
+      <Modal className="modalBox" open={open}>
+        <Box
+          sx={{
+            width: 600,
+            backgroundColor: "white",
+          }}
+        >
+          <h2
+            id="parent-modal-title"
+            style={{
+              backgroundColor: "green",
+              height: "50px",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            Edit Timer
+          </h2>
+          <Box>
+            <Box>
+              <RadioGroup
+                row
+                aria-labelledby="demo-row-radio-buttons-group-label"
+                name="row-radio-buttons-group"
+                value={value}
+                onChange={handleChange}
+              >
+                <FormControlLabel
+                  value="Runasstopwatch"
+                  control={<Radio />}
+                  label="Run as stopwatch"
+                />
+                <FormControlLabel
+                  value="StopTimer"
+                  control={<Radio />}
+                  label="Stop Timer"
+                />
+              </RadioGroup>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                width: "100%",
+                padding: "0px 10px 5px 10px;",
+              }}
+            >
+              <Box sx={{ width: "50%" }}>
+                <InputLabel id="demo-simple-select-error-label">
+                  Hour
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-disabled-label"
+                  id="demo-simple-select-disabled"
+                  value={hr}
+                  sx={{ width: "100%" }}
+                  onChange={(event) => setHr(event.target.value)}
+                  disabled={value === "Runasstopwatch" ? true : false}
+                >
+                  {Object.keys(hour2).map((item) => (
+                    <MenuItem key={item} value={item}>
+                      {min[item]}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </Box>
+              <Box sx={{ width: "50%" }}>
+                <InputLabel id="demo-simple-select-error-label">
+                  Minutes
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-disabled-label"
+                  id="demo-simple-select-disabled"
+                  value={mi}
+                  sx={{ width: "100%" }}
+                  disabled={value === "Runasstopwatch" ? true : false}
+                  onChange={(event) => setmin(event.target.value)}
+                >
+                  {Object.keys(min).map((item) => (
+                    <MenuItem key={item} value={item}>
+                      {min[item]}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </Box>
+              <Box sx={{ width: "50%" }}>
+                <InputLabel id="demo-simple-select-error-label">
+                  Seconds
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-disabled-label"
+                  id="demo-simple-select-disabled"
+                  value={sec}
+                  sx={{ width: "100%" }}
+                  disabled={value === "Runasstopwatch" ? true : false}
+                  onChange={(event) => setsec(event.target.value)}
+                >
+                  {Object.keys(min).map((item) => (
+                    <MenuItem key={item} value={item}>
+                      {min[item]}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </Box>
+            </Box>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              padding: "0 10px",
+            }}
+          >
+            <div>
+              <Button
+                sx={{
+                  backgroundColor: "red !important",
+                  color: "white",
+                  margin: " 0px 0px 10px 0px",
+                }}
+                onClick={() => setOpen(false)}
+              >
+                Cancel
+              </Button>
+              <Button
+                sx={{
+                  backgroundColor: "green !important",
+                  color: "white",
+                  margin: " 0px 0px 10px 10px",
+                }}
+                onClick={onSetAlarm}
+              >
+                Start
+              </Button>
+            </div>
+          </Box>
+        </Box>
+      </Modal>
     </>
   );
 };

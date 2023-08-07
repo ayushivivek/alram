@@ -17,7 +17,6 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 10px 10px 10px 10px;
 }
 .timeHeading {
   font-size: 112px;
@@ -54,7 +53,6 @@ body {
   min-height: 549px;
   padding: 30px;
   width: calc(50% - 10px);
-  margin: 10px 10px 10px 10px;
 }
 .panelHeading {
   padding: 0px 0px 15px 0px;
@@ -100,7 +98,6 @@ body {
   border-color: #ddd;
   min-height: 349px;
   padding: 30px;
-  margin: 10px 10px 10px 10px;
 }
 .mainbody {
   width: 100%;
@@ -128,7 +125,7 @@ body {
   background-color: #2e7e4d;
 }
 .btnStop {
-  border-color: #2596be;
+  border-color: #a30505;
   color: #fff;
   background-color: #2596be;
   border-color: #2596be;
@@ -156,7 +153,7 @@ body {
   cursor: pointer;
 }
 .btnReset:hover {
-  background-color: #ffd11a;
+  background-color: #ebd063;
 }
 
 .whiteTimeBoxTime {
@@ -248,4 +245,51 @@ body.light {
 body.dark {
   --background: black;
   --text: white;
+}
+.whiteTimeBoxtime {
+  margin-bottom: 30px;
+  box-shadow: none;
+  border-width: 0;
+  border: 1px solid transparent;
+  border-color: #ddd;
+  min-height: 549px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.whiteTimeBoxx {
+  margin-bottom: 30px;
+  box-shadow: none;
+  border-width: 0;
+  border: 1px solid transparent;
+  border-color: #ddd;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.timeHeadingx {
+  font-size: 30px;
+  color: #555 !important;
+  margin-bottom: 0px;
+}
+.btnEdit {
+  border-color: #2596be;
+  color: #fff;
+  background-color: #2596be;
+  border-color: #2596be;
+  min-width: 90px;
+  padding: 8px 12px;
+  font-size: 13px;
+  line-height: 1.6;
+  border: none;
+  cursor: pointer;
+  margin-right: 5px !important;
+}
+.btnEdit:hover {
+  background-color: #63a1e3;
 }

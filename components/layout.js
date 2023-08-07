@@ -21,8 +21,8 @@ import AvTimerIcon from "@mui/icons-material/AvTimer";
 import TimerIcon from "@mui/icons-material/Timer";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
-import { themes } from "../contexts/ThemeContext";
 import TimelapseIcon from "@mui/icons-material/Timelapse";
+import { quickset } from "../uttils";
 
 const drawerWidth = 240;
 
@@ -64,7 +64,7 @@ const Drawer = styled(MuiDrawer, {
       }),
       width: theme.spacing(7),
       [theme.breakpoints.up("sm")]: {
-        width: theme.spacing(9),
+        width: theme.spacing(11),
       },
     }),
   },
@@ -76,6 +76,10 @@ export default function Layout({ children, toggleTheme, mode }) {
     setOpen(!open);
   };
   const router = useRouter();
+
+  React.useEffect(() => {
+    localStorage.setItem("myObject", JSON.stringify(quickset));
+  }, []);
 
   return (
     <div
@@ -142,7 +146,8 @@ export default function Layout({ children, toggleTheme, mode }) {
               <Link href={"/"}>
                 <a
                   className={`flex p-2 bg-blue-200 rounded hover:bg-blue-400 cursor-pointer ${
-                    router.asPath === "/" && "bg-blue-600 text-white"
+                    router.asPath === "/" &&
+                    "bg-blue-600 text-white justify-start"
                   }`}
                 >
                   <ListItemButton>
@@ -204,9 +209,18 @@ export default function Layout({ children, toggleTheme, mode }) {
             </li>
           </ul>
         </Drawer>
-        <Box component="main">
+        <Box sx={{ width: "100%" }} component="main">
           <Toolbar />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+          <Container
+            maxWidth="lg"
+            sx={{
+              pt: 4,
+              pb: 4,
+              maxHeight: "calc(100vh - 64px)",
+              overflow: "auto",
+              maxWidth: "100% !important",
+            }}
+          >
             {children}
           </Container>
         </Box>
