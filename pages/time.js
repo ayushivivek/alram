@@ -2,14 +2,24 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import moment from "moment";
 import moment1 from "moment-timezone";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
+import { Button } from "@mui/material";
 
 const TimerPage = () => {
+  const ll = JSON.parse(
+    typeof window !== "undefined" && localStorage.getItem("timeZone")
+  );
   const router = useRouter();
   const timeZones = moment1.tz.names();
   const [timezone, setTimezone] = useState([]);
-
+  const [open, setOpen] = useState(false);
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
+  const [selectedTimezone, setSelected] = useState();
 
   useEffect(() => {
     const updateDateTime = () => {
@@ -30,6 +40,16 @@ const TimerPage = () => {
     router.push(`/worldtime/${selected}`);
   };
 
+  const addTimeZone = () => {
+    if (selectedTimezone) {
+      localStorage.setItem(
+        "timeZone",
+        JSON.stringify([...ll, selectedTimezone])
+      );
+      setOpen(false);
+      setSelected("");
+    }
+  };
   return (
     <div>
       <div className="whiteTimeBox">
@@ -39,19 +59,25 @@ const TimerPage = () => {
       </div>
 
       <div className="parent">
-        {timezone.map((tz, index) => (
-          <div className="whiteTimeBoxTime child" key={index}>
-            <div className="panelHeadingtime" onClick={() => handleOnClick(tz)}>
-              {tz}
+        {ll &&
+          ll.map((tz, index) => (
+            <div className="whiteTimeBoxTime child" key={index}>
+              <div
+                className="panelHeadingtime"
+                onClick={() => handleOnClick(tz)}
+              >
+                {tz}
+              </div>
+              <div className="timemain">
+                {moment().tz(tz).format("h:mm:ss A")}
+              </div>
             </div>
-            <div className="timemain">
-              {moment().tz(tz).format("h:mm:ss A")}
-            </div>
-          </div>
-        ))}
-        <div className="addbtnwhitebox child">
-          <button className="btnStart">Add</button>
-        </div>
+          ))}
+      </div>
+      <div className="addbtnwhitebox child">
+        <button className="btnStart" onClick={() => setOpen(true)}>
+          Add
+        </button>
       </div>
       <div className="whiteTimeBoxthree">
         <div className="panelHeading">Most Popular Time Zones and Cities</div>
@@ -67,6 +93,75 @@ const TimerPage = () => {
           ))}
         </div>
       </div>
+      <Modal className="modalBox" open={open}>
+        <Box
+          sx={{
+            width: 600,
+            backgroundColor: "white",
+          }}
+        >
+          <h2
+            id="parent-modal-title"
+            style={{
+              backgroundColor: "green",
+              height: "50px",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            Add
+          </h2>
+          <Box style={{ padding: "30px 10px 30px 10px" }}>
+            <Box sx={{ width: "100%" }}>
+              <InputLabel id="demo-simple-select-error-label">
+                Country
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-disabled-label"
+                id="demo-simple-select-disabled"
+                sx={{ width: "100%" }}
+                onChange={(e) => setSelected(e.target.value)}
+              >
+                {timeZones.map((item) => (
+                  <MenuItem key={item} value={item}>
+                    {item}
+                  </MenuItem>
+                ))}
+              </Select>
+            </Box>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              padding: "0 10px",
+            }}
+          >
+            <div>
+              <Button
+                sx={{
+                  backgroundColor: "red !important",
+                  color: "white",
+                  margin: " 0px 0px 10px 0px",
+                }}
+                onClick={() => setOpen(false)}
+              >
+                Cancel
+              </Button>
+              <Button
+                sx={{
+                  backgroundColor: "green !important",
+                  color: "white",
+                  margin: " 0px 0px 10px 10px",
+                }}
+                onClick={addTimeZone}
+              >
+                Start
+              </Button>
+            </div>
+          </Box>
+        </Box>
+      </Modal>
     </div>
   );
 };

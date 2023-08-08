@@ -244,4 +244,15 @@ const quickset = {
   "1:10 AM": "1:10 AM",
 };
 
-export { hour, min, tunes, quick, hour2, quickset };
+const resentTime = [
+  "00:00:10",
+  "00:00:10",
+  "00:01:00",
+  "00:01:00",
+  "00:00:00",
+  "00:00:01",
+  "00:02:00",
+  "00:00:00",
+];
+
+export { hour, min, tunes, quick, hour2, quickset, resentTime };

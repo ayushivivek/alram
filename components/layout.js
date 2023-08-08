@@ -22,7 +22,8 @@ import TimerIcon from "@mui/icons-material/Timer";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import TimelapseIcon from "@mui/icons-material/Timelapse";
-import { quickset } from "../uttils";
+import { quickset, resentTime } from "../uttils";
+import moment1 from "moment-timezone";
 
 const drawerWidth = 240;
 
@@ -71,6 +72,7 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function Layout({ children, toggleTheme, mode }) {
+  const timeZones = moment1.tz.names();
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -79,6 +81,8 @@ export default function Layout({ children, toggleTheme, mode }) {
 
   React.useEffect(() => {
     localStorage.setItem("myObject", JSON.stringify(quickset));
+    localStorage.setItem("timeZone", JSON.stringify(timeZones.splice(0, 20)));
+    localStorage.setItem("resentTime", JSON.stringify(resentTime));
   }, []);
 
   return (

@@ -97,7 +97,7 @@ const AlarmClockPage = () => {
         }
       />
       <div className="whiteTimeBox">
-        <h2 className="timeHeading">{time}</h2>
+        <h2 className="timeHeading text-center">{time}</h2>
         <h3 className="dateHeading">{date}</h3>
         <button
           className="btnAlarm"

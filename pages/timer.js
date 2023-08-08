@@ -12,6 +12,9 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 
 const TimePage = () => {
+  const ll = JSON.parse(
+    typeof window !== "undefined" && localStorage.getItem("resentTime")
+  );
   const [value, setValue] = useState("Runasstopwatch");
   const [timer, setTimer] = useState(0);
   const [isActive, setIsActive] = useState(false);
@@ -46,18 +49,6 @@ const TimePage = () => {
 
     return () => clearInterval(timer);
   }, [isActive, timer]);
-
-  // useEffect(() => {
-  //   let interval = null;
-  //   if (isActive) {
-  //     interval = setInterval(() => {
-  //       setTimer((timer) => timer + 10);
-  //     }, 10); // Updating every 10 milliseconds for 1/100th of a second precision
-  //   } else if (!isActive && timer !== 0) {
-  //     clearInterval(interval);
-  //   }
-  //   return () => clearInterval(interval);
-  // }, [isActive, timer]);
 
   const handleStart = () => {
     if (formatTime() !== "00:00:00") {
@@ -99,9 +90,23 @@ const TimePage = () => {
     let alarmTime = `${hr.length == 2 ? hr : 0 + hr}:${
       mi.length == 2 ? mi : 0 + mi
     }:${sec.length == 2 ? sec : 0 + sec}`;
-    setTime(moment.duration(alarmTime));
+    {
+      option &&
+        localStorage.setItem("resentTime", JSON.stringify([...ll, alarmTime]));
+      setTime(moment.duration(alarmTime));
+    }
     setOpen(false);
   };
+
+  const handleQuick = (time) => {
+    setValue("StopTimer");
+    setTime(moment.duration(time));
+    setIsActive(true);
+    setOption(true);
+    localStorage.setItem("resentTime", JSON.stringify([...ll, time]));
+  };
+
+  console.log(ll);
   return (
     <>
       <div className="whiteTimeBox">
@@ -136,6 +141,85 @@ const TimePage = () => {
           >
             Reset
           </button>
+        </div>
+      </div>
+
+      <div className="mainWrapper">
+        <div className="whiteTimeBoxTwo">
+          <div className="panelHeading">
+            Set the timer for the specified time
+          </div>
+          <div className="panelBody">
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    <a onClick={() => handleQuick("00:01:00")}>01:00 min</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a onClick={() => handleQuick("00:02:00")}>02:00 min</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a onClick={() => handleQuick("00:03:00")}>03:00 min</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a onClick={() => handleQuick("00:04:00")}>04:00 min</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a onClick={() => handleQuick("00:05:00")}>05:00 min</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div className="whiteTimeBoxTwo">
+          <div className="panel-body">
+            <div className="panelHeading">Recently used</div>
+            <table>
+              <tbody>
+                {ll &&
+                  ll.reverse().map((item, index) => (
+                    <tr key={index}>
+                      <td onClick={() => handleQuick(item)}>{item}</td>
+                    </tr>
+                  ))}
+                <tr>
+                  <td>00:00:10</td>
+                </tr>
+                <tr>
+                  <td>00:00:10</td>
+                </tr>
+                <tr>
+                  <td>00:01:00</td>
+                </tr>
+                <tr>
+                  <td>00:01:00</td>
+                </tr>
+                <tr>
+                  <td>00:00:00</td>
+                </tr>
+                <tr>
+                  <td>00:00:01</td>
+                </tr>
+                <tr>
+                  <td>00:02:00</td>
+                </tr>
+                <tr>
+                  <td>00:00:00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 
