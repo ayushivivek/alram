@@ -154,27 +154,92 @@ const TimePage = () => {
               <tbody>
                 <tr>
                   <td>
-                    <a onClick={() => handleQuick("00:01:00")}>01:00 min</a>
+                    <a
+                      style={{ cursor: "pointer" }}
+                      onClick={() => handleQuick("00:01:00")}
+                    >
+                      01:00 min
+                    </a>
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <a onClick={() => handleQuick("00:02:00")}>02:00 min</a>
+                    <a
+                      style={{ cursor: "pointer" }}
+                      onClick={() => handleQuick("00:02:00")}
+                    >
+                      02:00 min
+                    </a>
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <a onClick={() => handleQuick("00:03:00")}>03:00 min</a>
+                    <a
+                      style={{ cursor: "pointer" }}
+                      onClick={() => handleQuick("00:03:00")}
+                    >
+                      03:00 min
+                    </a>
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <a onClick={() => handleQuick("00:04:00")}>04:00 min</a>
+                    <a
+                      style={{ cursor: "pointer" }}
+                      onClick={() => handleQuick("00:04:00")}
+                    >
+                      04:00 min
+                    </a>
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <a onClick={() => handleQuick("00:05:00")}>05:00 min</a>
+                    <a
+                      style={{ cursor: "pointer" }}
+                      onClick={() => handleQuick("00:05:00")}
+                    >
+                      05:00 min
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a
+                      style={{ cursor: "pointer" }}
+                      onClick={() => handleQuick("00:05:00")}
+                    >
+                      10:00 min
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a
+                      style={{ cursor: "pointer" }}
+                      onClick={() => handleQuick("00:05:00")}
+                    >
+                      30:00 min
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a
+                      style={{ cursor: "pointer" }}
+                      onClick={() => handleQuick("00:05:00")}
+                    >
+                      45:00 min
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a
+                      style={{ cursor: "pointer" }}
+                      onClick={() => handleQuick("00:05:00")}
+                    >
+                      01:05:00 hour
+                    </a>
                   </td>
                 </tr>
               </tbody>
@@ -190,33 +255,14 @@ const TimePage = () => {
                 {ll &&
                   ll.reverse().map((item, index) => (
                     <tr key={index}>
-                      <td onClick={() => handleQuick(item)}>{item}</td>
+                      <td
+                        onClick={() => handleQuick(item)}
+                        style={{ cursor: "pointer" }}
+                      >
+                        {item}
+                      </td>
                     </tr>
                   ))}
-                <tr>
-                  <td>00:00:10</td>
-                </tr>
-                <tr>
-                  <td>00:00:10</td>
-                </tr>
-                <tr>
-                  <td>00:01:00</td>
-                </tr>
-                <tr>
-                  <td>00:01:00</td>
-                </tr>
-                <tr>
-                  <td>00:00:00</td>
-                </tr>
-                <tr>
-                  <td>00:00:01</td>
-                </tr>
-                <tr>
-                  <td>00:02:00</td>
-                </tr>
-                <tr>
-                  <td>00:00:00</td>
-                </tr>
               </tbody>
             </table>
           </div>

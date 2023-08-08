@@ -8,6 +8,7 @@ import Select from "@mui/material/Select";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import { Button } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
 
 const TimerPage = () => {
   const ll = JSON.parse(
@@ -20,6 +21,8 @@ const TimerPage = () => {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [selectedTimezone, setSelected] = useState();
+  const [edit, setEdit] = useState(false);
+  const [editIndex, setIndex] = useState();
 
   useEffect(() => {
     const updateDateTime = () => {
@@ -47,8 +50,26 @@ const TimerPage = () => {
         JSON.stringify([...ll, selectedTimezone])
       );
       setOpen(false);
-      setSelected("");
+      setSelected();
     }
+  };
+
+  const editHandle = () => {
+    ll[editIndex] = selectedTimezone;
+    console.log(ll);
+    localStorage.setItem("timeZone", JSON.stringify(ll));
+    setOpen(false);
+  };
+
+  const openedit = (index) => {
+    setEdit(true);
+    setOpen(true);
+    setIndex(index);
+  };
+
+  const openadd = () => {
+    setEdit(false);
+    setOpen(true);
   };
   return (
     <div>
@@ -64,9 +85,22 @@ const TimerPage = () => {
             <div className="whiteTimeBoxTime child" key={index}>
               <div
                 className="panelHeadingtime"
-                onClick={() => handleOnClick(tz)}
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                }}
               >
-                {tz}
+                <div className="brck" onClick={() => handleOnClick(tz)}>
+                  {tz}s
+                </div>
+                <div
+                  style={{
+                    cursor: "pointer",
+                  }}
+                  onClick={() => openedit(index)}
+                >
+                  <EditIcon />
+                </div>
               </div>
               <div className="timemain">
                 {moment().tz(tz).format("h:mm:ss A")}
@@ -75,7 +109,7 @@ const TimerPage = () => {
           ))}
       </div>
       <div className="addbtnwhitebox child">
-        <button className="btnStart" onClick={() => setOpen(true)}>
+        <button className="btnStart" onClick={() => openadd()}>
           Add
         </button>
       </div>
@@ -148,16 +182,31 @@ const TimerPage = () => {
               >
                 Cancel
               </Button>
-              <Button
-                sx={{
-                  backgroundColor: "green !important",
-                  color: "white",
-                  margin: " 0px 0px 10px 10px",
-                }}
-                onClick={addTimeZone}
-              >
-                Start
-              </Button>
+              {!edit ? (
+                <Button
+                  sx={{
+                    backgroundColor: "green !important",
+                    color: "white",
+                    margin: " 0px 0px 10px 10px",
+                  }}
+                  onClick={addTimeZone}
+                  disabled={selectedTimezone === undefined ? true : false}
+                >
+                  Start
+                </Button>
+              ) : (
+                <Button
+                  sx={{
+                    backgroundColor: "green !important",
+                    color: "white",
+                    margin: " 0px 0px 10px 10px",
+                  }}
+                  onClick={editHandle}
+                  disabled={selectedTimezone === undefined ? true : false}
+                >
+                  Edit
+                </Button>
+              )}
             </div>
           </Box>
         </Box>

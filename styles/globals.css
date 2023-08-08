@@ -165,6 +165,7 @@ body {
   border-color: #ddd;
   min-height: 200px;
   max-height: 400px;
+  border-radius: 10px;
 }
 
 .panelHeadingtime {
@@ -293,4 +294,10 @@ body.dark {
 }
 .btnEdit:hover {
   background-color: #63a1e3;
+}
+
+.brck {
+  word-break: break-all;
+  padding-right: 10px;
+  cursor: pointer;
 }
