@@ -15,6 +15,11 @@ const TimePage = () => {
   const ll = JSON.parse(
     typeof window !== "undefined" && localStorage.getItem("resentTime")
   );
+
+  const add = JSON.parse(
+    typeof window !== "undefined" && localStorage.getItem("add")
+  );
+
   const [value, setValue] = useState("Runasstopwatch");
   const [timer, setTimer] = useState(0);
   const [isActive, setIsActive] = useState(false);
@@ -25,7 +30,6 @@ const TimePage = () => {
   const [mi, setmin] = useState("0");
   const [sec, setsec] = useState("0");
   const [open, setOpen] = useState(false);
-
   useEffect(() => {
     const timer = setInterval(() => {
       if (isActive) {
@@ -96,6 +100,7 @@ const TimePage = () => {
       setTime(moment.duration(alarmTime));
     }
     setOpen(false);
+    localStorage.setItem("add", true);
   };
 
   const handleQuick = (time) => {
@@ -105,8 +110,6 @@ const TimePage = () => {
     setOption(true);
     localStorage.setItem("resentTime", JSON.stringify([...ll, time]));
   };
-
-  console.log(ll);
   return (
     <>
       <div className="whiteTimeBox">
@@ -116,13 +119,23 @@ const TimePage = () => {
           <h2 className="timeHeading">{formatTimeCount()}</h2>
         )}
         <div>
-          <button
-            className="btnEdit"
-            type="button"
-            onClick={() => setOpen(true)}
-          >
-            Edit
-          </button>
+          {add ? (
+            <button
+              className="btnEdit"
+              type="button"
+              onClick={() => setOpen(true)}
+            >
+              Edit
+            </button>
+          ) : (
+            <button
+              className="btnEdit"
+              type="button"
+              onClick={() => setOpen(true)}
+            >
+              Add
+            </button>
+          )}
           {!isActive ? (
             <button className="btnAlarm" type="button" onClick={handleStart}>
               Start

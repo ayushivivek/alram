@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }) {
     setTheme(theme === themes.dark ? themes.light : themes.dark);
   };
   return (
-    <ThemeContext.Provider value={theme}>
+    <ThemeContext.Provider value={theme} className="w-full">
       <Layout toggleTheme={toggleTheme} mode={theme}>
         <Component {...pageProps} />
       </Layout>

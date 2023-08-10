@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-import { hour, min, tunes, quick, quickset } from "../uttils";
+import { hour, min, tunes, quick, quicksetAfter } from "../uttils";
 import InputLabel from "@mui/material/InputLabel";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
@@ -82,6 +82,12 @@ const AlarmClockPage = () => {
     localStorage.setItem("alarm", alarmTime);
     alert(`Alarm set for ${alarmTime}`);
   };
+
+  const setAlarmAftertime = (time) => {
+    const futureTime = moment().add(time, "minutes").format("h:mm A");
+    console.log(futureTime);
+    localStorage.setItem("alarm", futureTime);
+  };
   return (
     <div>
       <ReactPlayer
@@ -117,6 +123,21 @@ const AlarmClockPage = () => {
           </button>
         </div>
       )}
+      <div className="whiteTimeBoxxx">
+        <div className="panelHeadingxx">Set the alarm After specified time</div>
+        <div style={{ marginTop: "20px" }}>
+          {Object.keys(quicksetAfter).map((item, index) => (
+            <p
+              className="alermBtn"
+              style={{ cursor: "pointer" }}
+              key={index}
+              onClick={() => setAlarmAftertime(item)}
+            >
+              {quicksetAfter[item]}
+            </p>
+          ))}
+        </div>
+      </div>
 
       <div className="mainWrapper">
         <div className="whiteTimeBoxTwo">

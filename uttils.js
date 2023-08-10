@@ -244,6 +244,15 @@ const quickset = {
   "1:10 AM": "1:10 AM",
 };
 
+const quicksetAfter = {
+  1: "0:10 AM",
+  15: "0:15 AM",
+  20: "0:20 AM",
+  25: "0:25 AM",
+  30: "0:30 AM",
+  45: "0:45 AM",
+};
+
 const resentTime = [
   "00:00:10",
   "00:00:10",
@@ -255,4 +264,4 @@ const resentTime = [
   "00:00:00",
 ];
 
-export { hour, min, tunes, quick, hour2, quickset, resentTime };
+export { hour, min, tunes, quick, hour2, quickset, resentTime, quicksetAfter };

@@ -51,6 +51,7 @@ const Drawer = styled(MuiDrawer, {
   "& .MuiDrawer-paper": {
     position: "relative",
     whiteSpace: "nowrap",
+    minHeight: "100vh",
     width: drawerWidth,
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
@@ -73,7 +74,7 @@ const Drawer = styled(MuiDrawer, {
 
 export default function Layout({ children, toggleTheme, mode }) {
   const timeZones = moment1.tz.names();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -85,6 +86,7 @@ export default function Layout({ children, toggleTheme, mode }) {
     localStorage.setItem("resentTime", JSON.stringify(resentTime));
   }, []);
 
+  console.log(typeof window !== "undefined" && window.innerWidth);
   return (
     <div
       className="min-h-screen flex flex-col"
