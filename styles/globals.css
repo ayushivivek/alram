@@ -9,6 +9,7 @@ body {
 }
 .dark .MuiPaper-root.MuiPaper-elevation {
   background-color: #000;
+  color: white;
 }
 .dark header.MuiPaper-root.MuiPaper-elevation {
   background-color: #1976d2;
