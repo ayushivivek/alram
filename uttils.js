@@ -245,12 +245,12 @@ const quickset = {
 };
 
 const quicksetAfter = {
-  1: "0:10 AM",
-  15: "0:15 AM",
-  20: "0:20 AM",
-  25: "0:25 AM",
-  30: "0:30 AM",
-  45: "0:45 AM",
+  10: "0:10 min",
+  15: "0:15 min",
+  20: "0:20 min",
+  25: "0:25 min",
+  30: "0:30 min",
+  45: "0:45 min",
 };
 
 const resentTime = [
