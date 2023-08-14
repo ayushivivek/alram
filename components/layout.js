@@ -147,7 +147,7 @@ export default function Layout({ children, toggleTheme, mode }) {
           </Toolbar>
           <Divider />
           {/* <List component="nav"> */}
-          <ul>
+          <ul className="icon_list_wrp">
             <li className="m-2">
               <Link href={"/"}>
                 <a

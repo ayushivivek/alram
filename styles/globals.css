@@ -95,6 +95,28 @@ body {
   .whiteTimeBoxTwo {
     width: 100%;
   }
+  .timeHeading {
+    font-size: 66px;
+  }
+  .icon_list_wrp li a .MuiListItemButton-gutters {
+    padding: 0 !important;
+  }
+  body {
+    overflow-x: hidden;
+  }
+  .css-15yma32-MuiDrawer-docked .MuiDrawer-paper {
+    position: fixed;
+    left: 0;
+    transition: all ease 0.7s;
+  }
+  .css-n7rtur-MuiPaper-root-MuiAppBar-root {
+    left: 0 !important;
+    width: 100% !important;
+    transition: all ease 0.7s;
+  }
+  .css-1vh3fpr-MuiDrawer-docked .MuiDrawer-paper {
+    transition: all ease 0.7s;
+  }
 }
 
 .recenttime {
@@ -255,7 +277,7 @@ body.light {
 }
 
 body.dark {
-  --background: black;
+  --background: #0e0f14;
   --text: white;
 }
 .whiteTimeBoxtime {
