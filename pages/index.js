@@ -222,7 +222,10 @@ const AlarmClockPage = () => {
         </div>
       </div>
       <Modal className="modalBox" open={open} onClose={() => setOpen(false)}>
-        <Box sx={{ width: 600, backgroundColor: "white" }}>
+        <Box
+          sx={{ width: 600, backgroundColor: "white" }}
+          className="popup_timer_wrp"
+        >
           <h2
             id="parent-modal-title"
             style={{

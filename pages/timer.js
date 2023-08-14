@@ -490,6 +490,7 @@ const TimePage = () => {
       </div>
       <Modal className="modalBox" open={open}>
         <Box
+          className="popup_timer_wrp"
           sx={{
             width: 600,
             backgroundColor: "white",
@@ -531,6 +532,7 @@ const TimePage = () => {
               sx={{
                 display: "flex",
                 width: "100%",
+                gap: "5px",
                 padding: "0px 10px 5px 10px;",
               }}
             >

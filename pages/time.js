@@ -129,6 +129,7 @@ const TimerPage = () => {
       </div>
       <Modal className="modalBox" open={open}>
         <Box
+          className="popup_timer_wrp"
           sx={{
             width: 600,
             backgroundColor: "white",

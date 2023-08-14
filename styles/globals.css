@@ -96,7 +96,25 @@ body {
     width: 100%;
   }
   .timeHeading {
-    font-size: 66px;
+    font-size: 45px;
+    text-align: center;
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+  .parent .whiteTimeBoxTime.child {
+    width: calc(100% - 10px);
+    margin-bottom: 0;
+    min-height: 115px;
+    max-height: initial;
+  }
+  .list .listChid {
+    width: calc(100% - 10px);
+  }
+  .addbtnwhitebox.child {
+    width: calc(100% - 10px);
+    margin: 10px 0;
+    min-height: 100px;
+    max-height: 100px;
   }
   .icon_list_wrp li a .MuiListItemButton-gutters {
     padding: 0 !important;
@@ -116,6 +134,17 @@ body {
   }
   .css-1vh3fpr-MuiDrawer-docked .MuiDrawer-paper {
     transition: all ease 0.7s;
+  }
+  .css-8atqhb {
+    width: calc(100% - 56px);
+  }
+  .list {
+    max-height: 500px;
+    overflow-y: auto;
+  }
+  .modalBox .popup_timer_wrp {
+    width: 95%;
+    margin: 0 auto;
   }
 }
 
