@@ -127,6 +127,11 @@ body {
     left: 0;
     transition: all ease 0.7s;
   }
+  .css-1mqzofi .MuiDrawer-paper {
+    position: fixed !important;
+    left: 0;
+    transition: all ease 0.7s;
+  }
   .css-n7rtur-MuiPaper-root-MuiAppBar-root {
     left: 0 !important;
     width: 100% !important;
