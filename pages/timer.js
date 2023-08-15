@@ -118,7 +118,7 @@ const TimePage = () => {
         ) : (
           <h2 className="timeHeading">{formatTimeCount()}</h2>
         )}
-        <div>
+        <div className="buttons">
           {add ? (
             <button
               className="btnEdit"

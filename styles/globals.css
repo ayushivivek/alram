@@ -156,6 +156,19 @@ body {
     width: 95%;
     margin: 0 auto;
   }
+  .btnEdit {
+    margin-right: 0 !important;
+    margin-bottom: 5px !important;
+  }
+  .btnReset {
+    margin-left: 0 !important;
+    margin-top: 5px !important;
+  }
+  .buttons {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .recenttime {
@@ -298,7 +311,7 @@ body {
   line-height: 1.6;
   border: none;
   cursor: pointer;
-  margin-right: 5px !important;
+  margin-right: 5px;
 }
 .modalBox {
   display: flex;
@@ -361,7 +374,7 @@ body.dark {
   line-height: 1.6;
   border: none;
   cursor: pointer;
-  margin-right: 5px !important;
+  margin-right: 5px;
 }
 .btnEdit:hover {
   background-color: #63a1e3;
