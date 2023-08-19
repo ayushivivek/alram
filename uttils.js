@@ -245,12 +245,12 @@ const quickset = {
 };
 
 const quicksetAfter = {
-  10: "0:10 min",
-  15: "0:15 min",
-  20: "0:20 min",
-  25: "0:25 min",
-  30: "0:30 min",
-  45: "0:45 min",
+  10: "10 min",
+  15: "15 min",
+  20: "20 min",
+  25: "25 min",
+  30: "30 min",
+  45: "45 min",
 };
 
 const resentTime = [
@@ -263,5 +263,39 @@ const resentTime = [
   "00:02:00",
   "00:00:00",
 ];
-
-export { hour, min, tunes, quick, hour2, quickset, resentTime, quicksetAfter };
+const holidays = [
+  { date: "2024-01-01", name: "New Year" },
+  { date: "2024-01-15", name: "Martin Luther King Day" },
+  { date: "2024-02-02", name: "Groundhog Day" },
+  { date: "2024-02-10", name: "Chinese New Year" },
+  { date: "2024-02-14", name: "Valentine's Day" },
+  { date: "2024-02-19", name: "Presidents Day" },
+  { date: "2024-03-17", name: "St. Patrick's Day" },
+  { date: "2024-03-29", name: "Good Friday" },
+  { date: "2024-03-31", name: "Easter" },
+  { date: "2024-04-15", name: "Tax Day" },
+  { date: "2024-05-12", name: "Mother's Day" },
+  { date: "2024-05-27", name: "Memorial Day" },
+  { date: "2024-06-16", name: "Father's Day" },
+  { date: "2024-06-19", name: "Juneteenth" },
+  { date: "2024-07-04", name: "Independence Day" },
+  { date: "2023-09-04", name: "Labor Day" },
+  { date: "2023-10-09", name: "Columbus Day" },
+  { date: "2023-10-31", name: "Halloween" },
+  { date: "2023-11-11", name: "Veterans Day" },
+  { date: "2023-11-23", name: "Thanksgiving Day" },
+  { date: "2023-11-24", name: "Black Friday" },
+  { date: "2023-11-27", name: "Cyber Monday" },
+  { date: "2023-12-25", name: "Christmas" },
+];
+export {
+  hour,
+  min,
+  tunes,
+  quick,
+  hour2,
+  quickset,
+  resentTime,
+  quicksetAfter,
+  holidays,
+};

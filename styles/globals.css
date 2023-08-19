@@ -402,3 +402,27 @@ body.dark {
   padding: 0px 0px 10px 0px;
   border-bottom: 1px solid #ddd;
 }
+@font-face {
+  font-family: "Digital-7";
+  src: url("/fonts/Digital-7.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.digital-clock {
+  font-family: "Digital-7", sans-serif;
+}
+.modedes {
+  display: flex;
+}
+.modemob {
+  display: none;
+}
+@media (max-width: 567px) {
+  .modedes {
+    display: none;
+  }
+  .modemob {
+    display: block;
+  }
+}

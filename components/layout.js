@@ -24,6 +24,12 @@ import Brightness7Icon from "@mui/icons-material/Brightness7";
 import TimelapseIcon from "@mui/icons-material/Timelapse";
 import { quickset, resentTime } from "../uttils";
 import moment1 from "moment-timezone";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 const drawerWidth = 240;
 
@@ -72,9 +78,27 @@ const Drawer = styled(MuiDrawer, {
   },
 }));
 
-export default function Layout({ children, toggleTheme, mode }) {
+export default function Layout({
+  children,
+  toggleTheme,
+  mode,
+  handleDigital,
+  digit,
+}) {
+  const ll = JSON.parse(
+    typeof window !== "undefined" && localStorage.getItem("digital")
+  );
   const timeZones = moment1.tz.names();
   const [open, setOpen] = React.useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open1 = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -86,7 +110,6 @@ export default function Layout({ children, toggleTheme, mode }) {
     localStorage.setItem("resentTime", JSON.stringify(resentTime));
   }, []);
 
-  console.log(typeof window !== "undefined" && window.innerWidth);
   return (
     <div
       className="min-h-screen flex flex-col"
@@ -124,12 +147,82 @@ export default function Layout({ children, toggleTheme, mode }) {
             >
               Alarm Clock
             </Typography>
-            <Box>
-              {mode} mode
-              <IconButton sx={{ ml: 1 }} onClick={toggleTheme} color="inherit">
-                {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
-              </IconButton>
-            </Box>
+            <div className="modedes">
+              <Box>
+                digital font
+                <FormControlLabel
+                  sx={{ ml: 1 }}
+                  control={
+                    <Switch
+                      checked={digit}
+                      onChange={handleDigital}
+                      color="success"
+                      value="dynamic-class-name"
+                    />
+                  }
+                />
+              </Box>
+              <Box>
+                {mode} mode
+                <IconButton
+                  sx={{ ml: 1 }}
+                  onClick={toggleTheme}
+                  color="inherit"
+                >
+                  {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
+                </IconButton>
+              </Box>
+            </div>
+            <div className="modemob">
+              <KeyboardArrowDownIcon
+                aria-controls={open1 ? "basic-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open1 ? "true" : undefined}
+                onClick={handleClick}
+              />
+              <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open1}
+                onClose={handleClose}
+                MenuListProps={{
+                  "aria-labelledby": "basic-button",
+                }}
+              >
+                <MenuItem>
+                  <Box>
+                    digital font
+                    <FormControlLabel
+                      sx={{ ml: 1 }}
+                      control={
+                        <Switch
+                          checked={digit}
+                          onChange={handleDigital}
+                          color="success"
+                          value="dynamic-class-name"
+                        />
+                      }
+                    />
+                  </Box>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <Box>
+                    {mode} mode
+                    <IconButton
+                      sx={{ ml: 1 }}
+                      onClick={toggleTheme}
+                      color="inherit"
+                    >
+                      {mode === "dark" ? (
+                        <Brightness7Icon />
+                      ) : (
+                        <Brightness4Icon />
+                      )}
+                    </IconButton>
+                  </Box>
+                </MenuItem>
+              </Menu>
+            </div>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>

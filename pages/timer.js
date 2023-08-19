@@ -6,16 +6,16 @@ import { Button } from "@mui/material";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import { min, hour2 } from "../uttils";
+import { min, hour2, holidays } from "../uttils";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
+import ReactPlayer from "react-player";
 
-const TimePage = () => {
+const TimePage = ({ digit }) => {
   const ll = JSON.parse(
     typeof window !== "undefined" && localStorage.getItem("resentTime")
   );
-
   const add = JSON.parse(
     typeof window !== "undefined" && localStorage.getItem("add")
   );
@@ -30,6 +30,7 @@ const TimePage = () => {
   const [mi, setmin] = useState("0");
   const [sec, setsec] = useState("0");
   const [open, setOpen] = useState(false);
+  const [alrm, setAlrm] = useState(false);
   useEffect(() => {
     const timer = setInterval(() => {
       if (isActive) {
@@ -40,6 +41,10 @@ const TimePage = () => {
             } else {
               clearInterval(timer);
               setIsActive(false);
+              setAlrm(true);
+              setTimeout(() => {
+                setAlrm(false);
+              }, 10000);
               return moment.duration("00:00:00");
             }
           });
@@ -110,13 +115,36 @@ const TimePage = () => {
     setOption(true);
     localStorage.setItem("resentTime", JSON.stringify([...ll, time]));
   };
+  const getRemainingDays = (holidayDate) => {
+    const today = new Date();
+    const holiday = new Date(holidayDate);
+
+    // Calculate the difference in milliseconds
+    const difference = holiday - today;
+
+    // Convert difference from milliseconds to days
+    return Math.ceil(difference / (1000 * 60 * 60 * 24));
+  };
+
   return (
     <>
+      <ReactPlayer
+        style={{ display: "none" }}
+        url={
+          "https://downloads.imjafar.com/ringtones/Nokia-1208-Espionage-Ringtone.mp3"
+        }
+        loop={true}
+        playing={alrm}
+      />
       <div className="whiteTimeBox">
         {option ? (
-          <h2 className="timeHeading">{formatTime()}</h2>
+          <h2 className={`timeHeading ${digit && "digital-clock"}`}>
+            {formatTime()}
+          </h2>
         ) : (
-          <h2 className="timeHeading">{formatTimeCount()}</h2>
+          <h2 className={`timeHeading ${digit && "digital-clock"}`}>
+            {formatTimeCount()}
+          </h2>
         )}
         <div className="buttons">
           {add ? (
@@ -322,14 +350,17 @@ const TimePage = () => {
             <div className="panelHeading">Holidays</div>
             <table className="center table-lr">
               <tbody>
-                <tr>
-                  <td>
-                    <a h>New Year</a>
-                  </td>
-                  <td>Jan 1, 2024</td>
-                  <td>149 days</td>
-                </tr>
-                <tr>
+                {holidays.map((item) => (
+                  <tr>
+                    <td>{item.name} </td>
+                    <td>{item.date} </td>
+                    <td style={{ padding: "2px 10px" }}>
+                      {getRemainingDays(item.date)} days
+                    </td>
+                  </tr>
+                ))}
+
+                {/* <tr>
                   <td>
                     <a>Martin Luther King Day</a>
                   </td>
@@ -482,7 +513,7 @@ const TimePage = () => {
                   </td>
                   <td>Dec 25, 2023</td>
                   <td>142 days</td>
-                </tr>
+                </tr> */}
               </tbody>
             </table>
           </div>

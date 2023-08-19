@@ -10,7 +10,7 @@ import Box from "@mui/material/Box";
 import { Button } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 
-const TimerPage = () => {
+const TimerPage = ({ digit }) => {
   const ll = JSON.parse(
     typeof window !== "undefined" && localStorage.getItem("timeZone")
   );
@@ -56,7 +56,6 @@ const TimerPage = () => {
 
   const editHandle = () => {
     ll[editIndex] = selectedTimezone;
-    console.log(ll);
     localStorage.setItem("timeZone", JSON.stringify(ll));
     setOpen(false);
   };
@@ -75,8 +74,8 @@ const TimerPage = () => {
     <div>
       <div className="whiteTimeBox">
         <h6>Now Time</h6>
-        <h2 className="timeHeading">{time}</h2>
-        <h3 className="dateHeading">{date}</h3>
+        <h2 className={`timeHeading ${digit && "digital-clock"}`}>{time}</h2>
+        <h3 className={`dateHeading ${digit && "digital-clock"}`}>{date}</h3>
       </div>
 
       <div className="parent">
@@ -91,7 +90,7 @@ const TimerPage = () => {
                 }}
               >
                 <div className="brck" onClick={() => handleOnClick(tz)}>
-                  {tz}s
+                  {tz}
                 </div>
                 <div
                   style={{
@@ -102,7 +101,7 @@ const TimerPage = () => {
                   <EditIcon />
                 </div>
               </div>
-              <div className="timemain">
+              <div className={`timemain ${digit && "digital-clock"}`}>
                 {moment().tz(tz).format("h:mm:ss A")}
               </div>
             </div>

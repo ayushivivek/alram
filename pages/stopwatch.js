@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const StopWatchPage = () => {
+const StopWatchPage = ({ digit }) => {
   const [timer, setTimer] = useState(0);
   const [isActive, setIsActive] = useState(false);
   const [startOfCurrentLap, setStartOfCurrentLap] = useState(0);
@@ -49,12 +49,15 @@ const StopWatchPage = () => {
   };
 
   const currentLapTime = timer - startOfCurrentLap;
-
   return (
     <div>
       <div className="whiteTimeBox">
-        <h2 className="timeHeading">{formatTime(timer)}s</h2>
-        <p>Current Lap: {formatTime(currentLapTime)}</p>
+        <h2 className={`timeHeading text-center ${digit && "digital-clock"}`}>
+          {formatTime(timer)}
+        </h2>
+        <p className={`${digit && "digital-clock"}`}>
+          Current Lap: {formatTime(currentLapTime)}
+        </p>
         <div style={{ display: "flex" }}>
           {!isActive ? (
             <button className="btnStart" onClick={handleStart}>

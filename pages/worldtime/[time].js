@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import moment from "moment";
 import moment1 from "moment-timezone";
 
-export default function Time() {
+export default function Time({ digit }) {
   const router = useRouter();
   const { time } = router.query;
 
@@ -21,11 +21,11 @@ export default function Time() {
   return (
     <div>
       <div className="whiteTimeBoxtime">
-        <h2>{time}</h2>
-        <h2 className="timeHeading">
+        <h2 className={`${digit && "digital-clock"}`}>{time}</h2>
+        <h2 className={`timeHeading ${digit && "digital-clock"}`}>
           {moment().tz(time?.split("-").join("/"))?.format("h:mm:ss A")}
         </h2>
-        <h3 className="dateHeading">{`${moment()
+        <h3 className={`dateHeading ${digit && "digital-clock"}`}>{`${moment()
           ?.tz(time?.split("-").join("/"))
           ?.format("ddd")} - ${moment()
           ?.tz(time?.split("-").join("/"))

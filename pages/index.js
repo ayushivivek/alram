@@ -12,7 +12,7 @@ import { Button } from "@mui/material";
 import ReactPlayer from "react-player";
 import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
 
-const AlarmClockPage = () => {
+const AlarmClockPage = ({ digit }) => {
   const ll = JSON.parse(
     typeof window !== "undefined" && localStorage.getItem("myObject")
   );
@@ -85,7 +85,6 @@ const AlarmClockPage = () => {
 
   const setAlarmAftertime = (time) => {
     const futureTime = moment().add(time, "minutes").format("h:mm A");
-    console.log(futureTime);
     localStorage.setItem("alarm", futureTime);
   };
   return (
@@ -103,8 +102,10 @@ const AlarmClockPage = () => {
         }
       />
       <div className="whiteTimeBox">
-        <h2 className="timeHeading text-center">{time}</h2>
-        <h3 className="dateHeading">{date}</h3>
+        <h2 className={`timeHeading text-center ${digit && "digital-clock"}`}>
+          {time}
+        </h2>
+        <h3 className={`dateHeading ${digit && "digital-clock"}`}>{date}</h3>
         <button
           className="btnAlarm"
           type="button"
@@ -117,7 +118,9 @@ const AlarmClockPage = () => {
       {typeof window !== "undefined" && localStorage.getItem("alarm") && (
         <div className="whiteTimeBoxx">
           <AccessAlarmIcon sx={{ width: "100%", fontSize: 40 }} />
-          <h2 className="timeHeadingx">{localStorage.getItem("alarm")}</h2>
+          <h2 className={`timeHeadingx ${digit && "digital-clock"}`}>
+            {localStorage.getItem("alarm")}
+          </h2>
           <button className="btnStop" type="button" onClick={onCloseAlarm}>
             Stop Alarm
           </button>
@@ -396,7 +399,7 @@ const AlarmClockPage = () => {
                 color="disabled"
                 sx={{ width: "100%", fontSize: 40 }}
               />
-              <h4>
+              <h4 className={`${digit && "digital-clock"}`}>
                 {typeof window !== "undefined" && localStorage.getItem("alarm")}
               </h4>
             </div>
