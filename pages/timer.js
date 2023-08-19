@@ -350,8 +350,8 @@ const TimePage = ({ digit }) => {
             <div className="panelHeading">Holidays</div>
             <table className="center table-lr">
               <tbody>
-                {holidays.map((item) => (
-                  <tr>
+                {holidays.map((item, index) => (
+                  <tr key={index}>
                     <td>{item.name} </td>
                     <td>{item.date} </td>
                     <td style={{ padding: "2px 10px" }}>
