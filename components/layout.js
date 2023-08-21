@@ -30,6 +30,7 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import Head from "next/head";
 
 const drawerWidth = 240;
 
@@ -111,219 +112,230 @@ export default function Layout({
   }, []);
 
   return (
-    <div
-      className="min-h-screen flex flex-col"
-      style={{
-        backgroundColor: "var(--background)",
-        color: "var(--text)",
-      }}
-    >
-      <Box sx={{ display: "flex" }}>
-        <CssBaseline />
-        <AppBar position="absolute" open={open} style={{ position: "fixed" }}>
-          <Toolbar
-            sx={{
-              pr: "24px", // keep right padding when drawer closed
-            }}
-          >
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              onClick={toggleDrawer}
+    <>
+      <Head>
+        <title>Dashboard</title>
+        <meta name="dashboard" content="Dashboard page" />
+      </Head>
+
+      <div
+        className="min-h-screen flex flex-col"
+        style={{
+          backgroundColor: "var(--background)",
+          color: "var(--text)",
+        }}
+      >
+        <Box sx={{ display: "flex" }}>
+          <CssBaseline />
+          <AppBar position="absolute" open={open} style={{ position: "fixed" }}>
+            <Toolbar
               sx={{
-                marginRight: "36px",
-                ...(open && { display: "none" }),
+                pr: "24px", // keep right padding when drawer closed
               }}
             >
-              <MenuIcon />
-            </IconButton>
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              sx={{ flexGrow: 1 }}
-            >
-              Alarm Clock
-            </Typography>
-            <div className="modedes">
-              <Box>
-                digital font
-                <FormControlLabel
-                  sx={{ ml: 1 }}
-                  control={
-                    <Switch
-                      checked={digit}
-                      onChange={handleDigital}
-                      color="success"
-                      value="dynamic-class-name"
-                    />
-                  }
-                />
-              </Box>
-              <Box>
-                {mode} mode
-                <IconButton
-                  sx={{ ml: 1 }}
-                  onClick={toggleTheme}
-                  color="inherit"
-                >
-                  {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
-                </IconButton>
-              </Box>
-            </div>
-            <div className="modemob">
-              <KeyboardArrowDownIcon
-                aria-controls={open1 ? "basic-menu" : undefined}
-                aria-haspopup="true"
-                aria-expanded={open1 ? "true" : undefined}
-                onClick={handleClick}
-              />
-              <Menu
-                id="basic-menu"
-                anchorEl={anchorEl}
-                open={open1}
-                onClose={handleClose}
-                MenuListProps={{
-                  "aria-labelledby": "basic-button",
+              <IconButton
+                edge="start"
+                color="inherit"
+                aria-label="open drawer"
+                onClick={toggleDrawer}
+                sx={{
+                  marginRight: "36px",
+                  ...(open && { display: "none" }),
                 }}
               >
-                <MenuItem>
-                  <Box>
-                    digital font
-                    <FormControlLabel
-                      sx={{ ml: 1 }}
-                      control={
-                        <Switch
-                          checked={digit}
-                          onChange={handleDigital}
-                          color="success"
-                          value="dynamic-class-name"
-                        />
-                      }
-                    />
-                  </Box>
-                </MenuItem>
-                <MenuItem onClick={handleClose}>
-                  <Box>
-                    {mode} mode
-                    <IconButton
-                      sx={{ ml: 1 }}
-                      onClick={toggleTheme}
-                      color="inherit"
-                    >
-                      {mode === "dark" ? (
-                        <Brightness7Icon />
-                      ) : (
-                        <Brightness4Icon />
-                      )}
-                    </IconButton>
-                  </Box>
-                </MenuItem>
-              </Menu>
-            </div>
-          </Toolbar>
-        </AppBar>
-        <Drawer variant="permanent" open={open}>
-          <Toolbar
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-end",
-              px: [1],
-            }}
-          >
-            <IconButton onClick={toggleDrawer}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </Toolbar>
-          <Divider />
-          {/* <List component="nav"> */}
-          <ul className="icon_list_wrp">
-            <li className="m-2">
-              <Link href={"/"}>
-                <a
-                  className={`flex p-2 bg-blue-200 rounded hover:bg-blue-400 cursor-pointer ${
-                    router.asPath === "/" &&
-                    "bg-blue-600 text-white justify-start"
-                  }`}
+                <MenuIcon />
+              </IconButton>
+              <Typography
+                component="h1"
+                variant="h6"
+                color="inherit"
+                noWrap
+                sx={{ flexGrow: 1 }}
+              >
+                Alarm Clock
+              </Typography>
+              <div className="modedes">
+                <Box>
+                  digital font
+                  <FormControlLabel
+                    sx={{ ml: 1 }}
+                    control={
+                      <Switch
+                        checked={digit}
+                        onChange={handleDigital}
+                        color="success"
+                        value="dynamic-class-name"
+                      />
+                    }
+                  />
+                </Box>
+                <Box>
+                  {mode} mode
+                  <IconButton
+                    sx={{ ml: 1 }}
+                    onClick={toggleTheme}
+                    color="inherit"
+                  >
+                    {mode === "dark" ? (
+                      <Brightness7Icon />
+                    ) : (
+                      <Brightness4Icon />
+                    )}
+                  </IconButton>
+                </Box>
+              </div>
+              <div className="modemob">
+                <KeyboardArrowDownIcon
+                  aria-controls={open1 ? "basic-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={open1 ? "true" : undefined}
+                  onClick={handleClick}
+                />
+                <Menu
+                  id="basic-menu"
+                  anchorEl={anchorEl}
+                  open={open1}
+                  onClose={handleClose}
+                  MenuListProps={{
+                    "aria-labelledby": "basic-button",
+                  }}
                 >
-                  <ListItemButton>
-                    <ListItemIcon>
-                      <AccessAlarmIcon />
-                    </ListItemIcon>
-                    <ListItemText primary={"Alarm"} />
-                  </ListItemButton>
-                </a>
-              </Link>
-            </li>
-            <li className="m-2">
-              <Link href={"/time"}>
-                <a
-                  className={`flex p-2 bg-blue-200 rounded hover:bg-blue-400 cursor-pointer ${
-                    router.asPath === "/time" && "bg-blue-600 text-white"
-                  }`}
-                >
-                  <ListItemButton>
-                    <ListItemIcon>
-                      <AvTimerIcon />
-                    </ListItemIcon>
-                    <ListItemText primary={"Time"} />
-                  </ListItemButton>
-                </a>
-              </Link>
-            </li>
-            <li className="m-2">
-              <Link href={"/stopwatch"}>
-                <a
-                  className={`flex p-2 bg-blue-200 rounded hover:bg-blue-400 cursor-pointer ${
-                    router.asPath === "/stopwatch" && "bg-blue-600 text-white"
-                  }`}
-                >
-                  <ListItemButton>
-                    <ListItemIcon>
-                      <TimerIcon />
-                    </ListItemIcon>
-                    <ListItemText primary={"Stop Watch"} />
-                  </ListItemButton>
-                </a>
-              </Link>
-            </li>
-            <li className="m-2">
-              <Link href={"/timer"}>
-                <a
-                  className={`flex p-2 bg-blue-200 rounded hover:bg-blue-400 cursor-pointer ${
-                    router.asPath === "/timer" && "bg-blue-600 text-white"
-                  }`}
-                >
-                  <ListItemButton>
-                    <ListItemIcon>
-                      <TimelapseIcon />
-                    </ListItemIcon>
-                    <ListItemText primary={"Timer"} />
-                  </ListItemButton>
-                </a>
-              </Link>
-            </li>
-          </ul>
-        </Drawer>
-        <Box sx={{ width: "100%" }} component="main">
-          <Toolbar />
-          <Container
-            maxWidth="lg"
-            sx={{
-              pt: 4,
-              pb: 4,
-              maxHeight: "calc(100vh - 64px)",
-              overflow: "auto",
-              maxWidth: "100% !important",
-            }}
-          >
-            {children}
-          </Container>
+                  <MenuItem>
+                    <Box>
+                      digital font
+                      <FormControlLabel
+                        sx={{ ml: 1 }}
+                        control={
+                          <Switch
+                            checked={digit}
+                            onChange={handleDigital}
+                            color="success"
+                            value="dynamic-class-name"
+                          />
+                        }
+                      />
+                    </Box>
+                  </MenuItem>
+                  <MenuItem onClick={handleClose}>
+                    <Box>
+                      {mode} mode
+                      <IconButton
+                        sx={{ ml: 1 }}
+                        onClick={toggleTheme}
+                        color="inherit"
+                      >
+                        {mode === "dark" ? (
+                          <Brightness7Icon />
+                        ) : (
+                          <Brightness4Icon />
+                        )}
+                      </IconButton>
+                    </Box>
+                  </MenuItem>
+                </Menu>
+              </div>
+            </Toolbar>
+          </AppBar>
+          <Drawer variant="permanent" open={open}>
+            <Toolbar
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "flex-end",
+                px: [1],
+              }}
+            >
+              <IconButton onClick={toggleDrawer}>
+                <ChevronLeftIcon />
+              </IconButton>
+            </Toolbar>
+            <Divider />
+            {/* <List component="nav"> */}
+            <ul className="icon_list_wrp">
+              <li className="m-2">
+                <Link href={"/"}>
+                  <a
+                    className={`flex p-2 bg-blue-200 rounded hover:bg-blue-400 cursor-pointer ${
+                      router.asPath === "/" &&
+                      "bg-blue-600 text-white justify-start"
+                    }`}
+                  >
+                    <ListItemButton>
+                      <ListItemIcon>
+                        <AccessAlarmIcon />
+                      </ListItemIcon>
+                      <ListItemText primary={"Alarm"} />
+                    </ListItemButton>
+                  </a>
+                </Link>
+              </li>
+              <li className="m-2">
+                <Link href={"/time"}>
+                  <a
+                    className={`flex p-2 bg-blue-200 rounded hover:bg-blue-400 cursor-pointer ${
+                      router.asPath === "/time" && "bg-blue-600 text-white"
+                    }`}
+                  >
+                    <ListItemButton>
+                      <ListItemIcon>
+                        <AvTimerIcon />
+                      </ListItemIcon>
+                      <ListItemText primary={"Time"} />
+                    </ListItemButton>
+                  </a>
+                </Link>
+              </li>
+              <li className="m-2">
+                <Link href={"/stopwatch"}>
+                  <a
+                    className={`flex p-2 bg-blue-200 rounded hover:bg-blue-400 cursor-pointer ${
+                      router.asPath === "/stopwatch" && "bg-blue-600 text-white"
+                    }`}
+                  >
+                    <ListItemButton>
+                      <ListItemIcon>
+                        <TimerIcon />
+                      </ListItemIcon>
+                      <ListItemText primary={"Stop Watch"} />
+                    </ListItemButton>
+                  </a>
+                </Link>
+              </li>
+              <li className="m-2">
+                <Link href={"/timer"}>
+                  <a
+                    className={`flex p-2 bg-blue-200 rounded hover:bg-blue-400 cursor-pointer ${
+                      router.asPath === "/timer" && "bg-blue-600 text-white"
+                    }`}
+                  >
+                    <ListItemButton>
+                      <ListItemIcon>
+                        <TimelapseIcon />
+                      </ListItemIcon>
+                      <ListItemText primary={"Timer"} />
+                    </ListItemButton>
+                  </a>
+                </Link>
+              </li>
+            </ul>
+          </Drawer>
+          <Box sx={{ width: "100%" }} component="main">
+            <Toolbar />
+            <Container
+              maxWidth="lg"
+              sx={{
+                pt: 4,
+                pb: 4,
+                maxHeight: "calc(100vh - 64px)",
+                overflow: "auto",
+                maxWidth: "100% !important",
+              }}
+            >
+              {children}
+            </Container>
+          </Box>
         </Box>
-      </Box>
-    </div>
+      </div>
+    </>
   );
 }
